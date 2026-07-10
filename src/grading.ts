@@ -11,7 +11,15 @@ export interface Point {
   t: number;
 }
 
-export type EndingType = 'tome' | 'harai' | 'hane';
+/**
+ * 漢字 forms exactly ('止め', '払い', 'はね' — はね stays kana). Breaking
+ * change from the pre-0.3.0 romaji tokens ('tome' | 'harai' | 'hane'):
+ * GCS samples captured before 0.3.0 carry the romaji strings, so any code
+ * reading historical samples must translate them.
+ */
+export type EndingType = '止め' | '払い' | 'はね';
+
+export const ENDING_TYPES: readonly EndingType[] = ['止め', '払い', 'はね'];
 
 export interface EndingFeatures {
   /** px/ms over the tip window. */

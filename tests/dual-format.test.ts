@@ -33,4 +33,10 @@ describe('dual-format output', () => {
     const cjs = require('../dist/index.cjs');
     expect(cjs.NAMAZU_MODEL_PREFIX).toBe('sakana/namazu');
   });
+
+  it('exports the 漢字 ending tokens and directionTrend (0.3.0)', () => {
+    const cjs = require('../dist/index.cjs');
+    expect(cjs.ENDING_TYPES).toEqual(['止め', '払い', 'はね']);
+    expect(typeof cjs.directionTrend).toBe('function');
+  });
 });
