@@ -1,6 +1,6 @@
 {
   "name": "mojidoodle-contracts",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "MojiDoodle's shared domain contracts: collection-sample schemas, the grading wire protocol, and kana-matching rules",
   "author": {
     "name": "Lexa Baldwin",

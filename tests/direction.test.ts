@@ -27,6 +27,24 @@ describe('directionTrend', () => {
       return { x: 60-40*Math.sin(t), y: 20+40*(1-Math.cos(t)) }; });
     expect(directionTrend(arc)).toBe('⭩');
   });
+  it('real-data regression: 愛 stroke 1 (short curved ㇒ sweep) reads ⭩, not ⭠ (KanjiVG-sampled points)', () => {
+    const pts = [
+      {x:59.4,y:8.8},{x:59.3,y:9.1},{x:59.2,y:9.4},{x:59.0,y:9.7},{x:58.8,y:9.9},
+      {x:58.6,y:10.2},{x:58.4,y:10.5},{x:58.2,y:10.7},{x:57.9,y:10.9},{x:56.4,y:11.9},
+      {x:54.4,y:13.0},{x:51.9,y:14.1},{x:49.0,y:15.3},{x:45.8,y:16.5},{x:42.2,y:17.7},
+      {x:38.5,y:18.8},{x:34.6,y:19.9},
+    ];
+    expect(directionTrend(pts)).toBe('⭩');
+  });
+  it('real-data regression: 愛 stroke 6 (㇖-family: long horizontal + terminal hook) reads ⭢ (KanjiVG-sampled points)', () => {
+    const pts = [
+      {x:18.4,y:39.7},{x:25.7,y:38.9},{x:33.9,y:37.9},{x:42.8,y:36.8},{x:52.0,y:35.7},
+      {x:61.3,y:34.7},{x:70.5,y:33.8},{x:79.1,y:33.0},{x:87.0,y:32.6},{x:91.1,y:32.7},
+      {x:93.3,y:33.5},{x:93.9,y:34.7},{x:93.3,y:36.1},{x:91.9,y:37.7},{x:90.0,y:39.3},
+      {x:88.1,y:40.7},{x:86.4,y:41.8},
+    ];
+    expect(directionTrend(pts)).toBe('⭢');
+  });
   it('throws on fewer than 2 distinct points', () => {
     expect(() => directionTrend([])).toThrow();
     expect(() => directionTrend([{x:1,y:1},{x:1,y:1}])).toThrow();
