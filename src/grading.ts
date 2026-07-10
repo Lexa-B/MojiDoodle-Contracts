@@ -42,6 +42,15 @@ export interface EndingClassification {
   endingRegionStartIndex: number;
 }
 
+/** Which analysis model tier the user selected. 'fast' = Namazu (thinking
+ *  disabled), 'thorough' = Fugu. The worker may fall back from fast to
+ *  thorough; the analysis-done payload's `model` reports what actually ran. */
+export type AnalysisSpeed = 'fast' | 'thorough';
+
+/** Prefix of Namazu wire model names (internal AND future production variants).
+ *  Clients detect fast→thorough fallback by testing analysis.model against this. */
+export const NAMAZU_MODEL_PREFIX = 'sakana/namazu';
+
 export interface GradeRequest {
   strokes: Point[][];
   lassos: { points: { x: number; y: number }[] }[];
@@ -54,6 +63,7 @@ export interface GradeRequest {
   canonicalStrokes: string[] | null;
   expectedStrokeCount: number | null;
   appLang: 'en' | 'ja';
+  analysisSpeed: AnalysisSpeed;
 }
 
 export interface GradePayload {

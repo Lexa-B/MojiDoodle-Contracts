@@ -28,4 +28,9 @@ describe('dual-format output', () => {
     expect(pkg.exports['.'].require.types).toBe('./dist/index.d.cts');
     expect(pkg.exports['.'].require.default).toBe('./dist/index.cjs');
   });
+
+  it('exports the dual-model additions (0.2.0)', () => {
+    const cjs = require('../dist/index.cjs');
+    expect(cjs.NAMAZU_MODEL_PREFIX).toBe('sakana/namazu');
+  });
 });
