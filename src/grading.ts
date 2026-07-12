@@ -88,14 +88,14 @@ export interface GradePayload {
   segmentResult: unknown;
 }
 
-export const FUGU_VERDICTS = ['correct', 'wrong_order', 'wrong_direction', 'uncertain'] as const;
+export const ANALYSIS_VERDICTS = ['correct', 'wrong_order', 'wrong_direction', 'uncertain'] as const;
 
-export type FuguVerdict = (typeof FUGU_VERDICTS)[number];
+export type AnalysisVerdict = (typeof ANALYSIS_VERDICTS)[number];
 
-export interface FuguAnalysisInfo {
+export interface StrokeAnalysis {
   model: string;
   text: string;
-  verdict: FuguVerdict;
+  verdict: AnalysisVerdict;
   latencyMs: number;
 }
 

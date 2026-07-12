@@ -6,7 +6,7 @@
  * type and mc practice modes (which don't run the canvas pipeline).
  */
 
-import { Point, EndingClassification, FuguAnalysisInfo } from './grading';
+import { Point, EndingClassification, StrokeAnalysis } from './grading';
 
 /**
  * A selection lasso for manual segmentation.
@@ -157,8 +157,19 @@ export interface CollectionSampleV6 extends Omit<CollectionSampleV5, 'version'> 
  */
 export interface CollectionSampleV7 extends Omit<CollectionSampleV6, 'version'> {
   version: 7;
-  fuguAnalysis: FuguAnalysisInfo | null;
+  /** Field name retained from V7 (declaration of history); type updated to StrokeAnalysis in 0.3.2. */
+  fuguAnalysis: StrokeAnalysis | null;
+}
+
+/**
+ * v8 training sample — renames the analysis field: `fuguAnalysis` → `stroke_analysis`
+ * (either model's output; `.model` is the provenance). snake_case matches
+ * the stroke_info family. No other change from V7.
+ */
+export interface CollectionSampleV8 extends Omit<CollectionSampleV7, 'version' | 'fuguAnalysis'> {
+  version: 8;
+  stroke_analysis: StrokeAnalysis | null;
 }
 
 /** Type alias for the current "latest" sample shape. */
-export type CollectionSampleLatest = CollectionSampleV7;
+export type CollectionSampleLatest = CollectionSampleV8;

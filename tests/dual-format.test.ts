@@ -12,13 +12,13 @@ describe('dual-format output', () => {
   it('is requireable as CommonJS', () => {
     const cjs = require('../dist/index.cjs');
     expect(cjs.kanaMatch('っ', 'つ')).toBe(true);
-    expect(cjs.FUGU_VERDICTS).toContain('wrong_order');
+    expect(cjs.ANALYSIS_VERDICTS).toContain('wrong_order');
   });
 
   it('is importable as ESM', async () => {
     const esm = await import('../dist/index.js');
     expect(esm.kanaMatch('ー', '｜')).toBe(true);
-    expect(esm.FUGU_VERDICTS).toHaveLength(4);
+    expect(esm.ANALYSIS_VERDICTS).toHaveLength(4);
   });
 
   it('declares all three export conditions', () => {
@@ -38,5 +38,12 @@ describe('dual-format output', () => {
     const cjs = require('../dist/index.cjs');
     expect(cjs.ENDING_TYPES).toEqual(['止め', '払い', 'はね']);
     expect(typeof cjs.directionTrend).toBe('function');
+  });
+
+  it('exports the renamed analysis family + V8 (0.3.2)', () => {
+    const cjs = require('../dist/index.cjs');
+    expect(cjs.ANALYSIS_VERDICTS).toEqual(['correct', 'wrong_order', 'wrong_direction', 'uncertain']);
+    expect(cjs.FUGU_VERDICTS).toBeUndefined();       // clean rename, no alias
+    expect(cjs.NAMAZU_MODEL_PREFIX).toBe('sakana/namazu');
   });
 });
