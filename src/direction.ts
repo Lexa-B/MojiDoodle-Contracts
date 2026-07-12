@@ -24,7 +24,7 @@ export const DIRECTION_TRENDS: readonly DirectionTrend[] =
 
 const N_RESAMPLE = 64;
 
-function resample(points: { x: number; y: number }[]): { x: number; y: number }[] {
+export function resample(points: { x: number; y: number }[]): { x: number; y: number }[] {
   const segs: number[] = [];
   let total = 0;
   for (let i = 1; i < points.length; i++) {

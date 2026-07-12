@@ -3,6 +3,7 @@
  * POST /grade endpoint and what comes back over its SSE stream, plus the
  * stroke-ending classification types that ride along.
  */
+import type { CardStrokeInfo } from './geometry';
 
 /** A captured pen point. t is milliseconds relative to drawing start. */
 export interface Point {
@@ -72,6 +73,12 @@ export interface GradeRequest {
   expectedStrokeCount: number | null;
   appLang: 'en' | 'ja';
   analysisSpeed: AnalysisSpeed;
+  /**
+   * The card's curated stroke_info block (descriptors, expected endings,
+   * direction trends). Optional: absent from pre-0.3.3 clients — the worker
+   * falls back to the legacy prompt. Added in 0.3.3.
+   */
+  strokeInfo?: CardStrokeInfo;
 }
 
 export interface GradePayload {
