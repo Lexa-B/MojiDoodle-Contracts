@@ -79,6 +79,20 @@ export interface GradeRequest {
    * falls back to the legacy prompt. Added in 0.3.3.
    */
   strokeInfo?: CardStrokeInfo;
+  /**
+   * Present when the client captured the drawing in fixed-square mode: the
+   * square geometry plus a per-stroke slot assignment. Strokes are laid out
+   * slot-local with x offset slotIndex*squareSide (canvasWidth =
+   * slotCount*squareSide, canvasHeight = squareSide), so a backend that
+   * ignores this field still grades correctly via its own segmentation; a
+   * backend that honors it skips segmentation entirely. Added in 0.3.4.
+   */
+  fixedGrid?: {
+    /** Side length of one drawing square, in canvas px. */
+    squareSide: number;
+    /** Per-stroke slot index, parallel to `strokes`. */
+    strokeSlots: number[];
+  };
 }
 
 export interface GradePayload {

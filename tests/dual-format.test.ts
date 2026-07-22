@@ -46,4 +46,23 @@ describe('dual-format output', () => {
     expect(cjs.FUGU_VERDICTS).toBeUndefined();       // clean rename, no alias
     expect(cjs.NAMAZU_MODEL_PREFIX).toBe('sakana/namazu');
   });
+
+  it('GradeRequest accepts the 0.3.4 fixedGrid field', () => {
+    const req: import('../src/grading').GradeRequest = {
+      strokes: [[{ x: 1, y: 2, t: 0 }]],
+      lassos: [],
+      strokeEndings: [],
+      canvasWidth: 300,
+      canvasHeight: 150,
+      cardId: 'c1',
+      answers: ['かな'],
+      distractors: [],
+      canonicalStrokes: null,
+      expectedStrokeCount: null,
+      appLang: 'en',
+      analysisSpeed: 'fast',
+      fixedGrid: { squareSide: 150, strokeSlots: [0] },
+    };
+    expect(req.fixedGrid?.strokeSlots).toEqual([0]);
+  });
 });
