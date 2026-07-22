@@ -93,6 +93,14 @@ export interface GradeRequest {
     /** Per-stroke slot index, parallel to `strokes`. */
     strokeSlots: number[];
   };
+  /**
+   * Per-surface "Stroke ending analysis" toggle at CHECK time (workbook:
+   * stroke_ending_analysis_enabled; practice: its page-local toggle). When
+   * false, the worker strips all stroke-ending (止め・払い・はね) content from
+   * the analysis prompt. Absent (pre-0.3.5 clients) → endings included, the
+   * pre-0.3.5 behavior. Added in 0.3.5.
+   */
+  strokeEndingAnalysisEnabled?: boolean;
 }
 
 export interface GradePayload {
